@@ -90,7 +90,21 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 	@Override
 	public String getRouteLongName(GRoute gRoute) {
 		if (StringUtils.isEmpty(gRoute.getRouteLongName())) {
-			return "Route " + gRoute.getRouteShortName();
+			int rsn = Integer.parseInt(gRoute.getRouteShortName());
+			switch (rsn) {
+			// @formatter:off
+			case 1: return "Downtown / Southview & Country Club / Prairie Mall";
+			case 2: return "Downtown / Prairie Mall / Popular Dr & Countryside S";
+			case 3: return "Downtown / Prairie Mall / Eastlink Ctr";
+			case 4: return "Downtown / GPRC / Costco";
+			case 5: return "Lakeland & Crystal Lk / Prairie Mall / Royal Oaks & GPRC";
+			case 6: return "Westgate & Ctr W / Westpoite / Eastlink Ctr / GPRC";
+			case 7: return "Countryside S / Eastlink / O'Brien Lk / Signature Falls";
+			// @formatter:on
+			}
+			System.out.printf("\nUnexpected route long name %s!\n", gRoute);
+			System.exit(-1);
+			return null;
 		}
 		return super.getRouteLongName(gRoute);
 	}
@@ -132,12 +146,12 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 						Arrays.asList(new String[] { "85", "97", "255", "150", "172", "180", "186" })) //
 				.compileBothTripSort());
 		map2.put(7l, new RouteTripSpec(7l, //
-				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.EAST.id, //
-				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.WEST.id) //
-				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(new String[] { "172", "173", "247", "252", "32", "33", "123", "258" })) //
-				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(new String[] { "258", "35", "186", "172" })) //
+				0, MTrip.HEADSIGN_TYPE_STRING, "M9 Eastlink Ctr", //
+				1, MTrip.HEADSIGN_TYPE_STRING, "M15") //
+				.addTripSort(0, //
+						Arrays.asList(new String[] { "33", "123", "186" })) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { "186", "247", "33" })) //
 				.compileBothTripSort());
 		ALL_ROUTE_TRIPS2 = map2;
 	}
