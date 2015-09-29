@@ -1,4 +1,4 @@
 ca-grande-prairie-transit-bus-parser
 ====================================
 
-Parser for Grande Prarie Transit Bus data
+Parser for Grande Prairie Transit Bus data
