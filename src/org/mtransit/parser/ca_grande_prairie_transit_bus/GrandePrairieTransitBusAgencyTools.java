@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mtransit.parser.CleanUtils;
@@ -30,6 +29,7 @@ import org.mtransit.parser.mt.data.MTripStop;
 // https://data.cityofgp.com/Transportation/GP-Transit-GTFS-Feed/kwef-vsek
 // https://data.cityofgp.com/download/kwef-vsek/ZIP
 // http://jump.nextinsight.com/gtfs/ni_gp/google_transit.zip
+// https://gpt.mapstrat.com/current/google_transit.zip
 public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(String[] args) {
@@ -89,12 +89,26 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public long getRouteId(GRoute gRoute) {
+		if (!Utils.isDigitsOnly(gRoute.getRouteShortName())) {
+			if ("SJP".equalsIgnoreCase(gRoute.getRouteShortName())) {
+				return 8L;
+			} else if ("SJS".equalsIgnoreCase(gRoute.getRouteShortName())) {
+				return 9L;
+			}
+			System.out.printf("\nUnexpected route id %s!\n", gRoute);
+			System.exit(-1);
+			return -1L;
+		}
 		return Long.parseLong(gRoute.getRouteShortName()); // use route short name as route ID
 	}
 
 	@Override
 	public String getRouteLongName(GRoute gRoute) {
-		if (StringUtils.isEmpty(gRoute.getRouteLongName())) {
+		String routeLongName = gRoute.getRouteLongName();
+		if (("Route " + gRoute.getRouteShortName()).equals(routeLongName)) {
+			routeLongName = null;
+		}
+		if (StringUtils.isEmpty(routeLongName)) {
 			int rsn = Integer.parseInt(gRoute.getRouteShortName());
 			switch (rsn) {
 			// @formatter:off
@@ -126,37 +140,123 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
 		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
-		map2.put(1l, new RouteTripSpec(1l, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) //
+		map2.put(1L, new RouteTripSpec(1L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Country Club") //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "36", "43", "21", "55", "2" })) //
+						Arrays.asList(new String[] { //
+						"33", // "151", // 63Ave-98St
+								"37", // "159", // 72Ave-99St
+								"51", // "M7W", // Towne Centre
+								"1", // "M4", // Prairie Mall
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "2", "12", "21", "31", "36" })) //
+						Arrays.asList(new String[] { //
+						"1", // "M4", // Prairie Mall
+								"17", // "M7N", // Towne Centre
+								"33", // "151", // 63Ave-98St
+						})) //
 				.compileBothTripSort());
-		map2.put(3l, new RouteTripSpec(3l, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) //
+		map2.put(2L, new RouteTripSpec(2L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Poplar Dr") // COUNTRYSIDE SOUTH
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "186", "191", "21", "200", "207", "2" })) //
+						Arrays.asList(new String[] { //
+						"60", // "221", // Poplar Dr 74Ave
+								"64", // "243", // 62Ave-90St #CountrysideSouth
+								"64", // "243", // 62Ave-90St
+								"51", // "M7W", // Towne Centre
+								"1", // "M4", // Prairie Mall
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "2", "21", "190", "186" })) //
+						Arrays.asList(new String[] { //
+						"1", // "M4", // Prairie Mall
+								"17", // "M7N", // Towne Centre
+								"60", // "221", // Poplar Dr 74Ave
+						})) //
 				.compileBothTripSort());
-		map2.put(6l, new RouteTripSpec(6l, //
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.NORTH.getId(), //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_DIRECTION, MDirectionType.SOUTH.getId()) //
+		map2.put(3L, new RouteTripSpec(3L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Mission Hts") // EASTLINK CENTRE
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { "186", "235", "85" })) //
+						Arrays.asList(new String[] { //
+						"98", // "321", // MHD-83Ave
+								"104", // "M9", // Eastlink Centre
+								"17", // "M7N", // Towne Centre
+								"1", // "M4", // Prairie Mall
+						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { "85", "97", "255", "150", "172", "180", "186" })) //
+						Arrays.asList(new String[] { //
+						"1", // "M4", // Prairie Mall
+								"51", // "M7W", // Towne Centre
+								"98", // "321", // MHD-83Ave
+						})) //
 				.compileBothTripSort());
-		map2.put(7l, new RouteTripSpec(7l, //
-				0, MTrip.HEADSIGN_TYPE_STRING, "M9 Eastlink Ctr", //
-				1, MTrip.HEADSIGN_TYPE_STRING, "M15") //
-				.addTripSort(0, //
-						Arrays.asList(new String[] { "33", "123", "186" })) //
-				.addTripSort(1, //
-						Arrays.asList(new String[] { "186", "247", "33" })) //
+		map2.put(5L, new RouteTripSpec(5L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Crystal Lk", //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "GPRC") //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						"152", // "M6", // GPRC
+								"1", // "M4", // <> Prairie Mall
+								"179", // "551", // Crystal LkDr 128Ave
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						"179", // "551", // Crystal LkDr 128Ave
+								"1", // "M4", // <> Prairie Mall
+								"152", // "M6", // GPRC
+						})) //
+				.compileBothTripSort());
+		map2.put(6L, new RouteTripSpec(6L, //
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "GPRC", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Westpointe") // EASTLINK CENTRE
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"197", // "603", // Westpointe 83Ave
+								"104", // "M9", // Eastlink Centre
+								"152", // "M6", // GPRC
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"152", // "M6", // GPRC
+								"228", // "638", // ++ 97Ave-119St
+								"197", // "603", // Westpointe 83Ave
+						})) //
+				.compileBothTripSort());
+		map2.put(8L, new RouteTripSpec(8L, // SJP
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "St John Paul II", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "St Joes HS") //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"277", // "335A", // St Joes High School
+								"286", // "335J", // St John Paul II School
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"286", // "335J", // St John Paul II School
+								"277", // "335A", // St Joes High School
+						})) //
+				.compileBothTripSort());
+		map2.put(9L, new RouteTripSpec(9L, // SJS
+				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
+				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "St Joes HS") //
+				.addTripSort(MDirectionType.NORTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"103", // "335", // St. Joes HS
+								"127", // !=
+								"183", // <>
+								"1", // "M4", // <> Prairie Mall
+						})) //
+				.addTripSort(MDirectionType.SOUTH.intValue(), //
+						Arrays.asList(new String[] { //
+						"175", // "533", // Lakeland Dr 123Ave
+								"182", // !=
+								"183", // <>
+								"1", // "M4", // <> Prairie Mall
+								"132", // !=
+								"103", // "335", // St. Joes HS
+						})) //
 				.compileBothTripSort());
 		ALL_ROUTE_TRIPS2 = map2;
 	}
@@ -190,34 +290,20 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 		if (ALL_ROUTE_TRIPS2.containsKey(mRoute.getId())) {
 			return; // split
 		}
-		if (mRoute.getId() == 2l) {
-			if ("Countryside".equalsIgnoreCase(gTrip.getTripHeadsign())) {
-				mTrip.setHeadsignString(gTrip.getTripHeadsign(), MDirectionType.SOUTH.intValue());
-				return;
-			} else if ("High School".equalsIgnoreCase(gTrip.getTripHeadsign())) {
-				mTrip.setHeadsignString(gTrip.getTripHeadsign(), MDirectionType.NORTH.intValue());
-				return;
+		if (isGoodEnoughAccepted()) {
+			if (mRoute.getId() == 4L) {
+				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString("Downtown / GPRC / Costco", 0);
+					return;
+				}
+			} else if (mRoute.getId() == 7L) {
+				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString("Eastlink / O’Brien Lk / Signature Falls", 0);
+					return;
+				}
 			}
-			System.out.printf("\n%s: Unexpected trip %s!\n", mRoute.getId(), gTrip);
-			System.exit(-1);
-			return;
-		} else if (mRoute.getId() == 5l) {
-			String gTripHeadsignLC = gTrip.getTripHeadsign().toLowerCase(Locale.ENGLISH);
-			if (gTripHeadsignLC.endsWith("east")) {
-				mTrip.setHeadsignDirection(MDirectionType.EAST);
-				return;
-			} else if (gTripHeadsignLC.endsWith("west")) {
-				mTrip.setHeadsignDirection(MDirectionType.WEST);
-				return;
-			}
-			System.out.printf("\n%s: Unexpected trip %s!\n", mRoute.getId(), gTrip);
-			System.exit(-1);
-			return;
 		}
 		String tripHeadsign = gTrip.getTripHeadsign();
-		if (StringUtils.isEmpty(tripHeadsign)) {
-			tripHeadsign = mRoute.getLongName();
-		}
 		int directionId = gTrip.getDirectionId() == null ? 0 : gTrip.getDirectionId();
 		mTrip.setHeadsignString(cleanTripHeadsign(tripHeadsign), directionId);
 	}
