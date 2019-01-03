@@ -121,6 +121,9 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 			case 7: return "Countryside S / Eastlink / O'Brien Lk / Signature Falls";
 			case 90: return gRoute.getRouteLongName(); // TODO?
 			case 91: return gRoute.getRouteLongName(); // TODO?
+			case 92: return gRoute.getRouteLongName(); // TODO?
+			case 93: return gRoute.getRouteLongName(); // TODO?
+			case 94: return gRoute.getRouteLongName(); // TODO?
 			// @formatter:on
 			}
 			System.out.printf("\nUnexpected route long name %s!\n", gRoute);
@@ -308,6 +311,39 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 					return;
 				}
 			} else if (mRoute.getId() == 91L) {
+				if (false) {
+					// TODO
+				}
+				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString("0", 0);
+					return;
+				} else if (gTrip.getDirectionId() == 1 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString("1", 1);
+					return;
+				}
+			} else if (mRoute.getId() == 92L) {
+				if (false) {
+					// TODO
+				}
+				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString("0", 0);
+					return;
+				} else if (gTrip.getDirectionId() == 1 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString("1", 1);
+					return;
+				}
+			} else if (mRoute.getId() == 93L) {
+				if (false) {
+					// TODO
+				}
+				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString("0", 0);
+					return;
+				} else if (gTrip.getDirectionId() == 1 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
+					mTrip.setHeadsignString("1", 1);
+					return;
+				}
+			} else if (mRoute.getId() == 94L) {
 				if (false) {
 					// TODO
 				}
