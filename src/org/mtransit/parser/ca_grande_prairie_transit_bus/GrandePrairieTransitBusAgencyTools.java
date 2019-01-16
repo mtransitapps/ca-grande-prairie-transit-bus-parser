@@ -300,58 +300,45 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 					return;
 				}
 			} else if (mRoute.getId() == 90L) {
-				if (false) {
-					// TODO
-				}
 				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("0", 0);
+					mTrip.setHeadsignString("0 Clairmont", 0);
 					return;
 				} else if (gTrip.getDirectionId() == 1 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("1", 1);
+					mTrip.setHeadsignString("1 Clairmont", 1);
 					return;
 				}
 			} else if (mRoute.getId() == 91L) {
-				if (false) {
-					// TODO
-				}
 				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("0", 0);
+					mTrip.setHeadsignString("0 Sexsmith", 0);
 					return;
 				} else if (gTrip.getDirectionId() == 1 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("1", 1);
+					mTrip.setHeadsignString("1 Sexsmith", 1);
 					return;
 				}
 			} else if (mRoute.getId() == 92L) {
-				if (false) {
-					// TODO
-				}
-				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("0", 0);
+				if (gTrip.getDirectionId() == 0 //
+						&& (StringUtils.isEmpty(gTrip.getTripHeadsign()) || "Hythe".equals(gTrip.getTripHeadsign()))) {
+					mTrip.setHeadsignString("0 Hythe", 0);
 					return;
-				} else if (gTrip.getDirectionId() == 1 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("1", 1);
+				} else if (gTrip.getDirectionId() == 1 //
+						&& (StringUtils.isEmpty(gTrip.getTripHeadsign()) || "Hythe".equals(gTrip.getTripHeadsign()))) {
+					mTrip.setHeadsignString("1 Hythe", 1);
 					return;
 				}
 			} else if (mRoute.getId() == 93L) {
-				if (false) {
-					// TODO
-				}
 				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("0", 0);
+					mTrip.setHeadsignString("0 Beaverlodge", 0);
 					return;
 				} else if (gTrip.getDirectionId() == 1 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("1", 1);
+					mTrip.setHeadsignString("1 Beaverlodge", 1);
 					return;
 				}
 			} else if (mRoute.getId() == 94L) {
-				if (false) {
-					// TODO
-				}
 				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("0", 0);
+					mTrip.setHeadsignString("0 Wembley", 0);
 					return;
 				} else if (gTrip.getDirectionId() == 1 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
-					mTrip.setHeadsignString("1", 1);
+					mTrip.setHeadsignString("1 Wembley", 1);
 					return;
 				}
 			}
