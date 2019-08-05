@@ -48,9 +48,39 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 	public void start(String[] args) {
 		System.out.printf("\nGenerating GP Transit bus data...");
 		long start = System.currentTimeMillis();
+		boolean isNext = "next_".equalsIgnoreCase(args[2]);
+		if (isNext) {
+			setupNext();
+		}
 		this.serviceIds = extractUsefulServiceIds(args, this);
 		super.start(args);
 		System.out.printf("\nGenerating GP Transit bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
+	}
+
+	private void setupNext() {
+		ALL_ROUTE_TRIPS2.put(5L, new RouteTripSpec(5L, //
+				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Lakeland Dr", //
+				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "GPRC") //
+				.addTripSort(MDirectionType.EAST.intValue(), //
+						Arrays.asList(new String[] { //
+						Stops.ALL_STOPS.get("M6"), Stops2.ALL_STOPS2.get("M6"), // GPRC
+								Stops.ALL_STOPS.get("534"), Stops2.ALL_STOPS2.get("534"), // != 121Ave-100St
+								Stops.ALL_STOPS.get("M2"), Stops2.ALL_STOPS2.get("M2"), // <> Greyhound
+								Stops.ALL_STOPS.get("M4"), Stops2.ALL_STOPS2.get("M4"), // <> Prairie Mall
+								Stops.ALL_STOPS.get("503"), Stops2.ALL_STOPS2.get("503"), // != 100St-121Ave
+								Stops.ALL_STOPS.get("533"), Stops2.ALL_STOPS2.get("533"), // Lakeland Dr 123Ave
+
+						})) //
+				.addTripSort(MDirectionType.WEST.intValue(), //
+						Arrays.asList(new String[] { //
+						Stops.ALL_STOPS.get("533"), Stops2.ALL_STOPS2.get("533"), // Lakeland Dr 123Ave
+								Stops.ALL_STOPS.get("591"), Stops2.ALL_STOPS2.get("591"), // != 97St-117Ave
+								Stops.ALL_STOPS.get("M2"), Stops2.ALL_STOPS2.get("M2"), // <> Greyhound
+								Stops.ALL_STOPS.get("M4"), Stops2.ALL_STOPS2.get("M4"), // <> Prairie Mall
+								Stops.ALL_STOPS.get("554"), Stops2.ALL_STOPS2.get("554"), // != 121Ave-102St
+								Stops.ALL_STOPS.get("M6"), Stops2.ALL_STOPS2.get("M6"), // GPRC
+						})) //
+				.compileBothTripSort());
 	}
 
 	@Override
@@ -201,13 +231,20 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(MDirectionType.EAST.intValue(), //
 						Arrays.asList(new String[] { //
 						Stops.ALL_STOPS.get("M6"), Stops2.ALL_STOPS2.get("M6"), // GPRC
+								Stops.ALL_STOPS.get("534"), Stops2.ALL_STOPS2.get("534"), // != 121Ave-100St
+								Stops.ALL_STOPS.get("M2"), Stops2.ALL_STOPS2.get("M2"), // <> Greyhound
 								Stops.ALL_STOPS.get("M4"), Stops2.ALL_STOPS2.get("M4"), // <> Prairie Mall
+								Stops.ALL_STOPS.get("503"), Stops2.ALL_STOPS2.get("503"), // != 100St-121Ave
 								Stops.ALL_STOPS.get("551"), Stops2.ALL_STOPS2.get("551"), // Crystal LkDr 128Ave
+
 						})) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
 						Arrays.asList(new String[] { //
 						Stops.ALL_STOPS.get("551"), Stops2.ALL_STOPS2.get("551"), // Crystal LkDr 128Ave
+								Stops.ALL_STOPS.get("591"), Stops2.ALL_STOPS2.get("591"), // != 97St-117Ave
+								Stops.ALL_STOPS.get("M2"), Stops2.ALL_STOPS2.get("M2"), // <> Greyhound
 								Stops.ALL_STOPS.get("M4"), Stops2.ALL_STOPS2.get("M4"), // <> Prairie Mall
+								Stops.ALL_STOPS.get("554"), Stops2.ALL_STOPS2.get("554"), // != 121Ave-102St
 								Stops.ALL_STOPS.get("M6"), Stops2.ALL_STOPS2.get("M6"), // GPRC
 						})) //
 				.compileBothTripSort());
@@ -216,8 +253,16 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Westpointe") // EASTLINK CENTRE
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
-						Stops.ALL_STOPS.get("603"), Stops2.ALL_STOPS2.get("603"), // Westpointe 83Ave
+						Stops.ALL_STOPS.get("603"), Stops2.ALL_STOPS2.get("603"), // != Westpointe 83Ave
+								Stops.ALL_STOPS.get("605"), Stops2.ALL_STOPS2.get("605"), // ?? Westpointe 81Ave
+								Stops.ALL_STOPS.get("607"), Stops2.ALL_STOPS2.get("607"), // != Westpointe 77Ave
+								"204", "205", "206", "207", "208", "209", "210", "211", "212", "213", // !=
 								Stops.ALL_STOPS.get("M9"), Stops2.ALL_STOPS2.get("M9"), // Eastlink Centre
+								"214", "215", "216", // !=
+								Stops.ALL_STOPS.get("664"), Stops2.ALL_STOPS2.get("664"), // != 109St-86Ave
+								Stops.ALL_STOPS.get("668"), Stops2.ALL_STOPS2.get("668"), // ?? by St. John's Ambulance (on 109 St)
+								Stops.ALL_STOPS.get("670"), Stops2.ALL_STOPS2.get("670"), // != Westside Dr 107St
+								"220", "221", "222", //
 								Stops.ALL_STOPS.get("M6"), Stops2.ALL_STOPS2.get("M6"), // GPRC
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
