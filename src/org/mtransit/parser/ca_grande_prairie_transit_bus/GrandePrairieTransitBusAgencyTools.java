@@ -253,23 +253,25 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Westpointe") // EASTLINK CENTRE
 				.addTripSort(MDirectionType.NORTH.intValue(), //
 						Arrays.asList(new String[] { //
-						Stops.ALL_STOPS.get("603"), Stops2.ALL_STOPS2.get("603"), // != Westpointe 83Ave
-								Stops.ALL_STOPS.get("605"), Stops2.ALL_STOPS2.get("605"), // ?? Westpointe 81Ave
-								Stops.ALL_STOPS.get("607"), Stops2.ALL_STOPS2.get("607"), // != Westpointe 77Ave
-								"204", "205", "206", "207", "208", "209", "210", "211", "212", "213", // !=
+						Stops.ALL_STOPS.get("603"), Stops2.ALL_STOPS2.get("603"), // ?? Westpointe 83Ave
+								Stops.ALL_STOPS.get("605"), Stops2.ALL_STOPS2.get("605"), // ++ Westpointe 81Ave
+								Stops.ALL_STOPS.get("607"), Stops2.ALL_STOPS2.get("607"), // ++ Westpointe 77Ave
+								"205", "206", "207", "208", "209", "210", "211", "212", "213", // !=
+								Stops.ALL_STOPS.get("629"), Stops2.ALL_STOPS2.get("629"), // Pinnacle Dr Pinnacle Way
 								Stops.ALL_STOPS.get("M9"), Stops2.ALL_STOPS2.get("M9"), // Eastlink Centre
-								"214", "215", "216", // !=
-								Stops.ALL_STOPS.get("664"), Stops2.ALL_STOPS2.get("664"), // != 109St-86Ave
+								"215", "216", "217", // !=
+								Stops.ALL_STOPS.get("664"), Stops2.ALL_STOPS2.get("664"), // ++ 109St-86Ave
 								Stops.ALL_STOPS.get("668"), Stops2.ALL_STOPS2.get("668"), // ?? by St. John's Ambulance (on 109 St)
-								Stops.ALL_STOPS.get("670"), Stops2.ALL_STOPS2.get("670"), // != Westside Dr 107St
-								"220", "221", "222", //
+								Stops.ALL_STOPS.get("670"), Stops2.ALL_STOPS2.get("670"), // ++ Westside Dr 107St
 								Stops.ALL_STOPS.get("M6"), Stops2.ALL_STOPS2.get("M6"), // GPRC
 						})) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
 						Arrays.asList(new String[] { //
 						Stops.ALL_STOPS.get("M6"), Stops2.ALL_STOPS2.get("M6"), // GPRC
-								Stops.ALL_STOPS.get("638"), Stops2.ALL_STOPS2.get("638"), // ++ 97Ave-119St
-								Stops.ALL_STOPS.get("603"), Stops2.ALL_STOPS2.get("603"), // Westpointe 83Ave
+								Stops.ALL_STOPS.get("632"), Stops2.ALL_STOPS2.get("632"), // Service Canada / Canadian Tire (on 101 Ave)
+								Stops.ALL_STOPS.get("642"), Stops2.ALL_STOPS2.get("642"), // 97Ave-117St / Winners (on 97 Ave)
+								Stops.ALL_STOPS.get("662"), Stops2.ALL_STOPS2.get("662"), // ++ 84Ave-113St
+								Stops.ALL_STOPS.get("603"), Stops2.ALL_STOPS2.get("603"), // ?? Westpointe 83Ave / Fas Gas on WestPointe Dr
 						})) //
 				.compileBothTripSort());
 		map2.put(8L, new RouteTripSpec(8L, // SJP
