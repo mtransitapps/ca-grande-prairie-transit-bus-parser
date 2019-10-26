@@ -341,12 +341,12 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				}
 			} else if (mRoute.getId() == 92L) {
 				if (gTrip.getDirectionId() == 0 //
-						&& (StringUtils.isEmpty(gTrip.getTripHeadsign()) || "Hythe".equals(gTrip.getTripHeadsign()))) {
-					mTrip.setHeadsignString("0 Hythe", 0);
+						&& (StringUtils.isEmpty(gTrip.getTripHeadsign()) || "3 Downtown via Library/QEII".equals(gTrip.getTripHeadsign()))) {
+					mTrip.setHeadsignString("0 3 Downtown via Library/QEI", 0);
 					return;
 				} else if (gTrip.getDirectionId() == 1 //
-						&& (StringUtils.isEmpty(gTrip.getTripHeadsign()) || "Hythe".equals(gTrip.getTripHeadsign()))) {
-					mTrip.setHeadsignString("1 Hythe", 1);
+						&& (StringUtils.isEmpty(gTrip.getTripHeadsign()) || "3 Downtown via Library/QEII".equals(gTrip.getTripHeadsign()))) {
+					mTrip.setHeadsignString("1 3 Downtown via Library/QEI", 1);
 					return;
 				}
 			} else if (mRoute.getId() == 93L) {
