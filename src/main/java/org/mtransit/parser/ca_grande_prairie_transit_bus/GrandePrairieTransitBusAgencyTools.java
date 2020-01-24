@@ -280,6 +280,21 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 								Stops.getALL_STOPS().get("335"), // St. Joes HS
 						})) //
 				.compileBothTripSort());
+		map2.put(92L, new RouteTripSpec(92L, //
+				0, MTrip.HEADSIGN_TYPE_STRING, "Hythe", //
+				1, MTrip.HEADSIGN_TYPE_STRING, "Towne Ctr Mall") // Grande Prairie
+				.addTripSort(0, //
+						Arrays.asList(new String[] { //
+						Stops.getALL_STOPS().get("9298"), // City Service Center on 97 Ave #GrandePrairie
+								Stops.getALL_STOPS().get("9210"), // 103 St across from Tags #Hythe
+						})) //
+				.addTripSort(1, //
+						Arrays.asList(new String[] { //
+						Stops.getALL_STOPS().get("9306"), // 4 Ave at Amisk Court #Beaverlodge
+								Stops.getALL_STOPS().get("9210"), // 103 St across from Tags #Hythe
+								Stops.getALL_STOPS().get("9298"), // City Service Center on 97 Ave #GrandePrairie
+						})) //
+				.compileBothTripSort());
 		ALL_ROUTE_TRIPS2 = map2;
 	}
 
