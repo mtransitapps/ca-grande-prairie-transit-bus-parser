@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mtransit.parser.CleanUtils;
@@ -96,28 +97,38 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public long getRouteId(GRoute gRoute) {
-		if (!Utils.isDigitsOnly(gRoute.getRouteShortName())) {
-			if ("SJP".equalsIgnoreCase(gRoute.getRouteShortName())) {
+		String rsn = getRouteShortName(gRoute);
+		if (!Utils.isDigitsOnly(rsn)) {
+			if ("SJP".equalsIgnoreCase(rsn)) {
 				return 8L;
-			} else if ("SJS".equalsIgnoreCase(gRoute.getRouteShortName())) {
+			} else if ("SJS".equalsIgnoreCase(rsn)) {
 				return 9L;
 			}
 			System.out.printf("\nUnexpected route id %s!\n", gRoute);
 			System.exit(-1);
 			return -1L;
 		}
-		return Long.parseLong(gRoute.getRouteShortName()); // use route short name as route ID
+		return Long.parseLong(rsn); // use route short name as route ID
+	}
+
+	private static final Pattern STARTS_WTHI_ROUTE_ = Pattern.compile("(^route )", Pattern.CASE_INSENSITIVE);
+
+	@Override
+	public String getRouteShortName(GRoute gRoute) {
+		String rsn = gRoute.getRouteShortName();
+		rsn = STARTS_WTHI_ROUTE_.matcher(rsn).replaceAll(StringUtils.EMPTY);
+		return rsn;
 	}
 
 	@Override
 	public String getRouteLongName(GRoute gRoute) {
 		String routeLongName = gRoute.getRouteLongName();
-		if (("Route " + gRoute.getRouteShortName()).equals(routeLongName)) {
+		String rsn = getRouteShortName(gRoute);
+		if (("Route " + rsn).equals(routeLongName)) {
 			routeLongName = null;
 		}
 		if (StringUtils.isEmpty(routeLongName)) {
-			int rsn = Integer.parseInt(gRoute.getRouteShortName());
-			switch (rsn) {
+			switch (Integer.parseInt(rsn)) {
 			// @formatter:off
 			case 1: return "Downtown / Southview & Country Club / Prairie Mall";
 			case 2: return "Downtown / Prairie Mall / Popular Dr & Countryside S";
