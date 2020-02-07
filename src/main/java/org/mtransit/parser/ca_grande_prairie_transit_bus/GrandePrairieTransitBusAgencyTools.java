@@ -297,12 +297,12 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				.addTripSort(0, //
 						Arrays.asList(new String[] { //
 						Stops.getALL_STOPS().get("9298"), // City Service Center on 97 Ave #GrandePrairie
-								Stops.getALL_STOPS().get("9210"), // 103 St across from Tags #Hythe
+								Stops.getALL_STOPS().get("9212"), // 103 St across from Tags #Hythe
 						})) //
 				.addTripSort(1, //
 						Arrays.asList(new String[] { //
 						Stops.getALL_STOPS().get("9306"), // 4 Ave at Amisk Court #Beaverlodge
-								Stops.getALL_STOPS().get("9210"), // 103 St across from Tags #Hythe
+								Stops.getALL_STOPS().get("9212"), // 103 St across from Tags #Hythe
 								Stops.getALL_STOPS().get("9298"), // City Service Center on 97 Ave #GrandePrairie
 						})) //
 				.compileBothTripSort());
