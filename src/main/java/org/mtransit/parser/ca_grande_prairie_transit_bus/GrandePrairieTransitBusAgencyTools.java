@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.mtransit.parser.CleanUtils;
 import org.mtransit.parser.DefaultAgencyTools;
+import org.mtransit.parser.MTLog;
 import org.mtransit.parser.Pair;
 import org.mtransit.parser.SplitUtils;
 import org.mtransit.parser.SplitUtils.RouteTripSpec;
@@ -47,7 +48,7 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public void start(String[] args) {
-		System.out.printf("\nGenerating GP Transit bus data...");
+		MTLog.log("Generating GP Transit bus data...");
 		long start = System.currentTimeMillis();
 		boolean isNext = "next_".equalsIgnoreCase(args[2]);
 		if (isNext) {
@@ -55,10 +56,11 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 		}
 		this.serviceIds = extractUsefulServiceIds(args, this, true);
 		super.start(args);
-		System.out.printf("\nGenerating GP Transit bus data... DONE in %s.\n", Utils.getPrettyDuration(System.currentTimeMillis() - start));
+		MTLog.log("Generating GP Transit bus data... DONE in %s.", Utils.getPrettyDuration(System.currentTimeMillis() - start));
 	}
 
 	private void setupNext() {
+		// DO NOTHING
 	}
 
 	@Override
@@ -104,9 +106,7 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 			} else if ("SJS".equalsIgnoreCase(rsn)) {
 				return 9L;
 			}
-			System.out.printf("\nUnexpected route id %s!\n", gRoute);
-			System.exit(-1);
-			return -1L;
+			throw new MTLog.Fatal("Unexpected route id %s!", gRoute);
 		}
 		return Long.parseLong(rsn); // use route short name as route ID
 	}
@@ -144,9 +144,7 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 			case 94: return gRoute.getRouteLongName(); // TODO?
 			// @formatter:on
 			}
-			System.out.printf("\nUnexpected route long name %s!\n", gRoute);
-			System.exit(-1);
-			return null;
+			throw new MTLog.Fatal("Unexpected route long name %s!", gRoute);
 		}
 		return super.getRouteLongName(gRoute);
 	}
@@ -162,7 +160,7 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 
 	private static HashMap<Long, RouteTripSpec> ALL_ROUTE_TRIPS2;
 	static {
-		HashMap<Long, RouteTripSpec> map2 = new HashMap<Long, RouteTripSpec>();
+		HashMap<Long, RouteTripSpec> map2 = new HashMap<>();
 		map2.put(1L, new RouteTripSpec(1L, //
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Country Club") //
@@ -262,20 +260,6 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 								Stops.getALL_STOPS().get("603"), // ?? Westpointe 83Ave / Fas Gas on WestPointe Dr
 						})) //
 				.compileBothTripSort());
-		map2.put(8L, new RouteTripSpec(8L, // SJP
-				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "St John Paul II", //
-				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "St Joes HS") //
-				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(new String[] { //
-						Stops.getALL_STOPS().get("335A"), // St Joes High School
-								Stops.getALL_STOPS().get("335J"), // St John Paul II School
-						})) //
-				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(new String[] { //
-						Stops.getALL_STOPS().get("335J"), // St John Paul II School
-								Stops.getALL_STOPS().get("335A"), // St Joes High School
-						})) //
-				.compileBothTripSort());
 		map2.put(9L, new RouteTripSpec(9L, // SJS
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "St Joes HS") //
@@ -349,6 +333,11 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 					mTrip.setHeadsignString("Eastlink / O’Brien Lk / Signature Falls", 0);
 					return;
 				}
+			} else if (mRoute.getId() == 8L) { // SJP
+					if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
+						mTrip.setHeadsignString("St John Paul II", 0);
+						return;
+					}
 			} else if (mRoute.getId() == 90L) {
 				if (gTrip.getDirectionId() == 0 && StringUtils.isEmpty(gTrip.getTripHeadsign())) {
 					mTrip.setHeadsignString("0 Clairmont", 0);
@@ -400,9 +389,7 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 
 	@Override
 	public boolean mergeHeadsign(MTrip mTrip, MTrip mTripToMerge) {
-		System.out.printf("\nUnexptected trips to merge %s & %s!\n", mTrip, mTripToMerge);
-		System.exit(-1);
-		return false;
+		throw new MTLog.Fatal("Unexptected trips to merge %s & %s!", mTrip, mTripToMerge);
 	}
 
 	@Override
