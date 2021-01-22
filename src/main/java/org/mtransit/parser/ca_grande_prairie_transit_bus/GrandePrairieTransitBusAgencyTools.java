@@ -169,14 +169,14 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Country Club") //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("151"), // 63Ave-98St
 								Stops.getALL_STOPS().get("159"), // 72Ave-99St
 								Stops.getALL_STOPS().get("M7W"), // Towne Centre
 								Stops.getALL_STOPS().get("M4") // Prairie Mall
 						)) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("M4"), // Prairie Mall
 								Stops.getALL_STOPS().get("M7N"), // Towne Centre
 								Stops.getALL_STOPS().get("151") // 63Ave-98St
@@ -187,14 +187,14 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Poplar Dr") // COUNTRYSIDE SOUTH
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("221"), // Poplar Dr 74Ave
 								Stops.getALL_STOPS().get("243"), // 62Ave-90St #CountrysideSouth
 								Stops.getALL_STOPS().get("M7W"), // Towne Centre
 								Stops.getALL_STOPS().get("M4") // Prairie Mall
 						)) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("M4"), // Prairie Mall
 								Stops.getALL_STOPS().get("M7N"), // Towne Centre
 								Stops.getALL_STOPS().get("221") // Poplar Dr 74Ave
@@ -205,13 +205,13 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Mission Hts") // EASTLINK CENTRE
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("321"), // MHD-83Ave
 								Stops.getALL_STOPS().get("M7N"), // Towne Centre
 								Stops.getALL_STOPS().get("M4") // Prairie Mall
 						)) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("M4"), // Prairie Mall
 								Stops.getALL_STOPS().get("M7W"), // Towne Centre
 								Stops.getALL_STOPS().get("321") // MHD-83Ave
@@ -222,7 +222,7 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.EAST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Lakeland Dr", //
 				MDirectionType.WEST.intValue(), MTrip.HEADSIGN_TYPE_STRING, "GPRC") //
 				.addTripSort(MDirectionType.EAST.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("M6"), // GPRC
 								Stops.getALL_STOPS().get("534"), // != 121Ave-100St
 								Stops.getALL_STOPS().get("M2"), // <> Greyhound
@@ -231,7 +231,7 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 								Stops.getALL_STOPS().get("533") // Lakeland Dr 123Ave
 						)) //
 				.addTripSort(MDirectionType.WEST.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("533"), // Lakeland Dr 123Ave
 								Stops.getALL_STOPS().get("591"), // != 97St-117Ave
 								Stops.getALL_STOPS().get("M2"), // <> Greyhound
@@ -245,26 +245,21 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "GPRC", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Westpointe") // EASTLINK CENTRE
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(//
-								Stops.getALL_STOPS().get("603"), // ?? Westpointe 83Ave
-								Stops.getALL_STOPS().get("605"), // ++ Westpointe 81Ave
-								Stops.getALL_STOPS().get("607"), // ++ Westpointe 77Ave
-								"205", "206", "207", "208", "209", "210", "211", "212", "213", // !=
-								Stops.getALL_STOPS().get("629"), // Pinnacle Dr Pinnacle Way
+						Arrays.asList( //
+								Stops.getALL_STOPS().get("603"), // Westpointe 83Ave
+								Stops.getALL_STOPS().get("605"), "157", // ++ Westpointe Dr-81 Ave
+								Stops.getALL_STOPS().get("629"), "162", // ++ Pinnacle Dr-Pinnacle Way
 								Stops.getALL_STOPS().get("M9"), // Eastlink Centre
-								"215", "216", "217", // !=
-								Stops.getALL_STOPS().get("664"), // ++ 109St-86Ave
-								Stops.getALL_STOPS().get("668"), // ?? by St. John's Ambulance (on 109 St)
-								Stops.getALL_STOPS().get("670"), // ++ Westside Dr 107St
+								Stops.getALL_STOPS().get("639"), "663", // ++ 106 St-73 Ave
+								Stops.getALL_STOPS().get("608"), "669", // ++ Industrial Training Centre
 								Stops.getALL_STOPS().get("M6") // GPRC
 						)) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("M6"), // GPRC
-								Stops.getALL_STOPS().get("632"), // Service Canada / Canadian Tire (on 101 Ave)
-								Stops.getALL_STOPS().get("642"), // 97Ave-117St / Winners (on 97 Ave)
-								Stops.getALL_STOPS().get("662"), // ++ 84Ave-113St
-								Stops.getALL_STOPS().get("603") // ?? Westpointe 83Ave / Fas Gas on WestPointe Dr
+								Stops.getALL_STOPS().get("614"), "670", // ++ 107 Ave-109 St
+								Stops.getALL_STOPS().get("662"), "212", // 84 Ave-113 St
+								Stops.getALL_STOPS().get("603") // Westpointe 83Ave / Fas Gas on WestPointe Dr
 						)) //
 				.compileBothTripSort());
 		//noinspection deprecation
@@ -272,12 +267,12 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				MDirectionType.NORTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "Prairie Mall", //
 				MDirectionType.SOUTH.intValue(), MTrip.HEADSIGN_TYPE_STRING, "St Joes HS") //
 				.addTripSort(MDirectionType.NORTH.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("335"), // St. Joes HS
 								Stops.getALL_STOPS().get("M4") // <> Prairie Mall
 						)) //
 				.addTripSort(MDirectionType.SOUTH.intValue(), //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("533"), // Lakeland Dr 123Ave
 								Stops.getALL_STOPS().get("M4"), // <> Prairie Mall
 								Stops.getALL_STOPS().get("335") // St. Joes HS
@@ -288,12 +283,12 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 				0, MTrip.HEADSIGN_TYPE_STRING, "Hythe", //
 				1, MTrip.HEADSIGN_TYPE_STRING, "Towne Ctr Mall") // Grande Prairie
 				.addTripSort(0, //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("9298"), // City Service Center on 97 Ave #GrandePrairie
 								Stops.getALL_STOPS().get("9212") // 103 St across from Tags #Hythe
 						)) //
 				.addTripSort(1, //
-						Arrays.asList(//
+						Arrays.asList( //
 								Stops.getALL_STOPS().get("9306"), // 4 Ave at Amisk Court #Beaverlodge
 								Stops.getALL_STOPS().get("9212"), // 103 St across from Tags #Hythe
 								Stops.getALL_STOPS().get("9298") // City Service Center on 97 Ave #GrandePrairie
