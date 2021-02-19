@@ -94,9 +94,12 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 		return true;
 	}
 
+	private static final Pattern ENDS_WITH_P_ = Pattern.compile("( \\(.+\\)$)");
+
 	@NotNull
 	@Override
 	public String cleanTripHeadsign(@NotNull String tripHeadsign) {
+		tripHeadsign = ENDS_WITH_P_.matcher(tripHeadsign).replaceAll(EMPTY);
 		tripHeadsign = CleanUtils.cleanNumbers(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanBounds(tripHeadsign);
 		tripHeadsign = CleanUtils.cleanStreetTypes(tripHeadsign);
