@@ -1,17 +1,16 @@
 package org.mtransit.parser.ca_grande_prairie_transit_bus;
 
+import static org.mtransit.commons.StringUtils.EMPTY;
+
 import org.jetbrains.annotations.NotNull;
-import org.mtransit.commons.CharUtils;
+import org.jetbrains.annotations.Nullable;
 import org.mtransit.commons.CleanUtils;
 import org.mtransit.commons.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
-import org.mtransit.parser.MTLog;
 import org.mtransit.parser.gtfs.data.GRoute;
 import org.mtransit.parser.mt.data.MAgency;
 
 import java.util.regex.Pattern;
-
-import static org.mtransit.commons.StringUtils.EMPTY;
 
 // https://data.cityofgp.com/Transportation/GP-Transit-GTFS-Feed/kwef-vsek
 // https://data.cityofgp.com/download/kwef-vsek/ZIP
@@ -41,37 +40,48 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public long getRouteId(@NotNull GRoute gRoute) {
-		String rsn = getRouteShortName(gRoute);
-		if (!CharUtils.isDigitsOnly(rsn)) {
-			if ("SJP".equalsIgnoreCase(rsn)) {
-				return 8L;
-			} else if ("SJS".equalsIgnoreCase(rsn)) {
-				return 9L;
-			}
-			throw new MTLog.Fatal("Unexpected route id %s!", gRoute);
+	public boolean defaultRouteIdEnabled() {
+		return true;
+	}
+
+	@Override
+	public boolean useRouteShortNameForRouteId() {
+		return true;
+	}
+
+	@Nullable
+	@Override
+	public Long convertRouteIdFromShortNameNotSupported(@NotNull String routeShortName) {
+		if ("SJP".equalsIgnoreCase(routeShortName)) {
+			return 8L;
+		} else if ("SJS".equalsIgnoreCase(routeShortName)) {
+			return 9L;
 		}
-		return Long.parseLong(rsn); // use route short name as route ID
+		return null;
 	}
 
 	private static final Pattern STARTS_WITH_ROUTE_ = Pattern.compile("(^route )", Pattern.CASE_INSENSITIVE);
 
 	@NotNull
 	@Override
-	public String getRouteShortName(@NotNull GRoute gRoute) {
-		String rsn = gRoute.getRouteShortName();
-		rsn = STARTS_WITH_ROUTE_.matcher(rsn).replaceAll(EMPTY);
-		return rsn;
+	public String cleanRouteShortName(@NotNull String routeShortName) {
+		routeShortName = STARTS_WITH_ROUTE_.matcher(routeShortName).replaceAll(EMPTY);
+		return routeShortName;
 	}
 
 	@NotNull
 	@Override
 	public String getRouteLongName(@NotNull GRoute gRoute) {
 		if (StringUtils.isEmpty(gRoute.getRouteLongName())) {
-			String rsn = getRouteShortName(gRoute);
+			final String rsn = getRouteShortName(gRoute);
 			return "Route " + rsn; // TODO route long name from directions head-sign?
 		}
 		return super.getRouteLongName(gRoute);
+	}
+
+	@Override
+	public boolean defaultAgencyColorEnabled() {
+		return true;
 	}
 
 	private static final String AGENCY_COLOR_GREEN = "056839"; // GREEN (from PNG logo)
