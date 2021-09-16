@@ -5,11 +5,11 @@ import static org.mtransit.commons.StringUtils.EMPTY;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mtransit.commons.CleanUtils;
-import org.mtransit.commons.StringUtils;
 import org.mtransit.parser.DefaultAgencyTools;
-import org.mtransit.parser.gtfs.data.GRoute;
 import org.mtransit.parser.mt.data.MAgency;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 // https://data.cityofgp.com/Transportation/GP-Transit-GTFS-Feed/kwef-vsek
@@ -20,6 +20,12 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 
 	public static void main(@NotNull String[] args) {
 		new GrandePrairieTransitBusAgencyTools().start(args);
+	}
+
+	@Nullable
+	@Override
+	public List<Locale> getSupportedLanguages() {
+		return LANG_EN;
 	}
 
 	@Override
@@ -69,14 +75,9 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 		return routeShortName;
 	}
 
-	@NotNull
 	@Override
-	public String getRouteLongName(@NotNull GRoute gRoute) {
-		if (StringUtils.isEmpty(gRoute.getRouteLongName())) {
-			final String rsn = getRouteShortName(gRoute);
-			return "Route " + rsn; // TODO route long name from directions head-sign?
-		}
-		return super.getRouteLongName(gRoute);
+	public boolean defaultRouteLongNameEnabled() {
+		return true;
 	}
 
 	@Override
