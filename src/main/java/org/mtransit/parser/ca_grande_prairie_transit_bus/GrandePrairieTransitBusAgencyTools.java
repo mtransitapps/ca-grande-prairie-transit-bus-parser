@@ -96,7 +96,7 @@ public class GrandePrairieTransitBusAgencyTools extends DefaultAgencyTools {
 	}
 
 	@Override
-	public boolean directionSplitterEnabled() {
+	public boolean directionSplitterEnabled(long routeId) {
 		return false; // not useful because all loops
 	}
 
